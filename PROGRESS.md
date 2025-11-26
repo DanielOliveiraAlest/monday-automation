@@ -7,15 +7,15 @@
 
 | Sprint | Status | Concluídas | Total | Progresso |
 |--------|--------|------------|-------|-----------|
-| Sprint 1: Infraestrutura | 🔄 Em andamento | 8 | 10 | 80% |
+| Sprint 1: Infraestrutura | 🔄 Em andamento | 9 | 10 | 90% |
 | Sprint 2: API Integration | ⏳ Pendente | 0 | 10 | 0% |
 | Sprint 3: Automação Core | ⏳ Pendente | 0 | 10 | 0% |
 | Sprint 4: Produção Ready | ⏳ Pendente | 0 | 10 | 0% |
-| **TOTAL** | **🔄** | **8** | **40** | **20%** |
+| **TOTAL** | **🔄** | **9** | **40** | **23%** |
 
 ---
 
-## ✅ Sprint 1: Infraestrutura (8/10 concluídas)
+## ✅ Sprint 1: Infraestrutura (9/10 concluídas)
 
 **Objetivo**: Configurar ambiente Monday.com, criar projeto Google Apps Script e estabelecer comunicação básica
 
@@ -27,7 +27,7 @@
 - [x] 1.6 - Implementar função doPost básica
 - [x] 1.7 - Implementar resposta ao challenge do Monday
 - [x] 1.8 - Fazer deploy inicial como Web App
-- [ ] 1.9 - Testar URL com requisição POST manual
+- [x] 1.9 - Testar URL com requisição POST manual
 - [ ] 1.10 - Configurar primeiro webhook no Monday (teste)
 
 **Entregáveis**:
