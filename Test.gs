@@ -12,7 +12,7 @@
 // ============================================================================
 
 // Update this with your actual Web App URL
-var WEBHOOK_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+var WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxAG1O-HqeSeoEeRUSn0OMa64Djo9fH9GPdUCyS90kGfdEHOu_WqgFyvPy7mJsf4HRT/exec";
 
 // ============================================================================
 // TEST FUNCTIONS
