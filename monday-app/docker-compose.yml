@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: monday-automation-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    networks:
+      - monday-network
+    volumes:
+      - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis:
+    image: redis:7-alpine
+    container_name: monday-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - monday-network
+    command: redis-server --appendonly yes
+
+  nginx:
+    image: nginx:alpine
+    container_name: monday-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - monday-network
+
+volumes:
+  redis-data:
+
+networks:
+  monday-network:
+    driver: bridge

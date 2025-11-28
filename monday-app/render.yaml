@@ -1,0 +1,40 @@
+# Render.com deployment configuration
+services:
+  - type: web
+    name: monday-automation-app
+    runtime: node
+    region: oregon
+    plan: standard
+    buildCommand: npm install && cd client && npm install && npm run build
+    startCommand: node src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: REDIS_URL
+        fromService:
+          name: monday-redis
+          type: redis
+          property: connectionString
+      - key: MONDAY_CLIENT_ID
+        sync: false
+      - key: MONDAY_CLIENT_SECRET
+        sync: false
+      - key: MONDAY_APP_ID
+        sync: false
+      - key: MONDAY_SIGNING_SECRET
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: WEBHOOK_SECRET
+        generateValue: true
+
+  - type: redis
+    name: monday-redis
+    region: oregon
+    plan: starter
+    maxmemoryPolicy: allkeys-lru

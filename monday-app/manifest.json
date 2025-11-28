@@ -1,0 +1,122 @@
+{
+  "app_id": "YOUR_APP_ID",
+  "name": "Automation Suite Pro",
+  "description": "Professional automation suite for Monday.com with advanced workflow capabilities",
+  "category": "Productivity",
+  "version": "2.0.0",
+  "api_version": "2024-01",
+  "kind": "web",
+  "runtime": "external",
+  "base_url": "https://your-app-domain.com",
+  "auth": {
+    "type": "oauth2",
+    "client_id": "YOUR_CLIENT_ID",
+    "client_secret": "YOUR_CLIENT_SECRET",
+    "redirect_uri": "https://your-app-domain.com/auth/callback",
+    "scopes": [
+      "me:read",
+      "boards:read",
+      "boards:write",
+      "workspaces:read",
+      "workspaces:write",
+      "users:read",
+      "account:read",
+      "notifications:write",
+      "updates:read",
+      "updates:write",
+      "assets:read",
+      "tags:read",
+      "teams:read",
+      "webhooks:write"
+    ]
+  },
+  "features": [
+    {
+      "type": "board_view",
+      "name": "Automation Dashboard",
+      "description": "View and manage all automations",
+      "url": "/app/dashboard",
+      "icon": "dashboard"
+    },
+    {
+      "type": "item_view",
+      "name": "Item Automations",
+      "description": "Configure item-specific automations",
+      "url": "/app/item",
+      "icon": "automation"
+    },
+    {
+      "type": "account_settings",
+      "name": "Automation Settings",
+      "description": "Configure global automation settings",
+      "url": "/app/settings",
+      "icon": "settings"
+    }
+  ],
+  "webhooks": [
+    {
+      "event": "create_item",
+      "url": "/api/webhooks/item/create"
+    },
+    {
+      "event": "change_column_value",
+      "url": "/api/webhooks/column/change"
+    },
+    {
+      "event": "change_status_column_value",
+      "url": "/api/webhooks/status/change"
+    },
+    {
+      "event": "create_update",
+      "url": "/api/webhooks/update/create"
+    },
+    {
+      "event": "change_subitem_column_value",
+      "url": "/api/webhooks/subitem/change"
+    },
+    {
+      "event": "create_subitem",
+      "url": "/api/webhooks/subitem/create"
+    }
+  ],
+  "capabilities": {
+    "app_home": true,
+    "board_view": true,
+    "item_view": true,
+    "account_settings": true,
+    "context_menu": true,
+    "ai_assistant": false,
+    "doc_editor": false
+  },
+  "permissions": {
+    "boards": ["read", "write"],
+    "items": ["read", "write", "delete"],
+    "updates": ["read", "write"],
+    "users": ["read"],
+    "workspaces": ["read"],
+    "account": ["read"],
+    "webhooks": ["write"]
+  },
+  "monday_code_actions": [],
+  "icons": {
+    "small": "/assets/icon-32x32.png",
+    "medium": "/assets/icon-64x64.png",
+    "large": "/assets/icon-128x128.png"
+  },
+  "support": {
+    "url": "https://your-support-url.com",
+    "email": "support@your-company.com"
+  },
+  "marketplace": {
+    "pricing_model": "freemium",
+    "trial_period_days": 14,
+    "categories": ["Productivity", "Automation", "Workflow"],
+    "supported_languages": ["en", "pt", "es"],
+    "screenshots": [
+      "/assets/screenshot1.png",
+      "/assets/screenshot2.png",
+      "/assets/screenshot3.png"
+    ],
+    "video_url": "https://youtube.com/your-demo-video"
+  }
+}
