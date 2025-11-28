@@ -5,7 +5,7 @@ services:
     runtime: node
     region: oregon
     plan: standard
-    buildCommand: npm install && cd client && npm install && npm run build
+    buildCommand: npm install && npm run build
     startCommand: node src/server.js
     healthCheckPath: /api/health
     envVars:
@@ -14,10 +14,7 @@ services:
       - key: PORT
         value: 3000
       - key: REDIS_URL
-        fromService:
-          name: monday-redis
-          type: redis
-          property: connectionString
+        value: redis://localhost:6379
       - key: MONDAY_CLIENT_ID
         sync: false
       - key: MONDAY_CLIENT_SECRET
@@ -32,9 +29,3 @@ services:
         generateValue: true
       - key: WEBHOOK_SECRET
         generateValue: true
-
-  - type: redis
-    name: monday-redis
-    region: oregon
-    plan: starter
-    maxmemoryPolicy: allkeys-lru
