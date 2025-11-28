@@ -13,8 +13,6 @@ services:
         value: production
       - key: PORT
         value: 3000
-      - key: REDIS_URL
-        value: redis://localhost:6379
       - key: MONDAY_CLIENT_ID
         sync: false
       - key: MONDAY_CLIENT_SECRET
