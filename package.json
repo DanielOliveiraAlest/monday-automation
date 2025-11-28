@@ -4,8 +4,8 @@
   "description": "Monday.com Automation App - Enterprise Edition",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node monday-app/src/server.js",
+    "dev": "nodemon monday-app/src/server.js",
     "build": "echo 'No client build needed'",
     "test": "jest",
     "tunnel": "ngrok http 3000"
