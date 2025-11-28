@@ -1,5 +1,5 @@
 {
-  "app_id": "YOUR_APP_ID",
+  "app_id": "10698341",
   "name": "Automation Suite Pro",
   "description": "Professional automation suite for Monday.com with advanced workflow capabilities",
   "category": "Productivity",
@@ -7,12 +7,12 @@
   "api_version": "2024-01",
   "kind": "web",
   "runtime": "external",
-  "base_url": "https://your-app-domain.com",
+  "base_url": "https://monday-automation.onrender.com",
   "auth": {
     "type": "oauth2",
-    "client_id": "YOUR_CLIENT_ID",
-    "client_secret": "YOUR_CLIENT_SECRET",
-    "redirect_uri": "https://your-app-domain.com/auth/callback",
+    "client_id": "289a4b2f836e89b58e956303b7909469",
+    "client_secret": "307a75467ee424022661efcd1a2a9e91",
+    "redirect_uri": "https://monday-automation.onrender.com/auth/callback",
     "scopes": [
       "me:read",
       "boards:read",
