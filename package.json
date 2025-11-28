@@ -2,7 +2,7 @@
   "name": "monday-automation-app",
   "version": "2.0.0",
   "description": "Monday.com Automation App - Enterprise Edition",
-  "main": "src/server.js",
+  "main": "monday-app/src/server.js",
   "scripts": {
     "start": "node monday-app/src/server.js",
     "dev": "nodemon monday-app/src/server.js",
