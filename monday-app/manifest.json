@@ -7,12 +7,12 @@
   "api_version": "2024-01",
   "kind": "web",
   "runtime": "external",
-  "base_url": "https://monday-automation.onrender.com",
+  "base_url": "https://monday-automation-api.onrender.com",
   "auth": {
     "type": "oauth2",
     "client_id": "289a4b2f836e89b58e956303b7909469",
     "client_secret": "307a75467ee424022661efcd1a2a9e91",
-    "redirect_uri": "https://monday-automation.onrender.com/auth/callback",
+    "redirect_uri": "https://monday-automation-api.onrender.com/auth/callback",
     "scopes": [
       "me:read",
       "boards:read",

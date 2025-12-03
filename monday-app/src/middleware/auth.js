@@ -4,6 +4,16 @@ const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
+  // Allow demo token for testing
+  if (token === 'demo-token' && process.env.NODE_ENV !== 'production') {
+    req.user = {
+      userId: 'demo-user',
+      accountId: 'demo-account',
+      mondayToken: 'demo-monday-token'
+    };
+    return next();
+  }
+
   if (!token) {
     return res.status(401).json({ error: 'Access token required' });
   }

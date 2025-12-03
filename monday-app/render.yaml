@@ -1,18 +1,17 @@
 # Render.com deployment configuration
 services:
+  # Production API Service
   - type: web
-    name: monday-automation-app
-    runtime: node
-    region: oregon
-    plan: standard
-    buildCommand: npm install && npm run build
-    startCommand: node src/server.js
-    healthCheckPath: /api/health
+    name: monday-automation-api
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 3000
+        value: 10000
       - key: MONDAY_CLIENT_ID
         sync: false
       - key: MONDAY_CLIENT_SECRET
@@ -21,9 +20,19 @@ services:
         sync: false
       - key: MONDAY_SIGNING_SECRET
         sync: false
+      - key: APP_URL
+        value: https://monday-automation-api.onrender.com
+      - key: REDIRECT_URI
+        value: https://monday-automation-api.onrender.com/auth/callback
       - key: JWT_SECRET
-        generateValue: true
-      - key: SESSION_SECRET
         generateValue: true
       - key: WEBHOOK_SECRET
         generateValue: true
+      - key: LOG_LEVEL
+        value: info
+      - key: ENABLE_DEBUG_MODE
+        value: false
+      - key: ENABLE_METRICS
+        value: true
+    healthCheckPath: /api/health
+    autoDeploy: true

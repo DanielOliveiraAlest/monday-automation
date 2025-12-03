@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Suite Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f7f8fc;
+            color: #323338;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0066ff, #0052cc);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e1e2e6;
+        }
+        
+        .card h2 {
+            color: #0066ff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        .status-active {
+            background: #00c875;
+            color: white;
+        }
+        
+        .status-inactive {
+            background: #ff642e;
+            color: white;
+        }
+        
+        .btn {
+            background: #0066ff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #0052cc;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #e1e2e6;
+            color: #323338;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d2d6;
+        }
+        
+        .automation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e1e2e6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #fafbfc;
+        }
+        
+        .automation-info h3 {
+            margin-bottom: 5px;
+            color: #323338;
+        }
+        
+        .automation-info p {
+            color: #676879;
+            font-size: 0.9rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #00c875;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0066ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #ffebee;
+            border: 1px solid #ffcdd2;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .success {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .automation-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Automation Suite Pro</h1>
+            <p>Professional automation tools for Monday.com workflows</p>
+        </div>
+
+        <div id="app">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading your automation dashboard...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Monday.com SDK integration
+        (function() {
+            let mondaySDK = null;
+            let currentBoard = null;
+            let automations = [];
+
+            // Initialize Monday SDK
+            function initializeMondaySDK() {
+                try {
+                    mondaySDK = mondaySdk();
+                    mondaySDK.listen('context', (res) => {
+                        currentBoard = res.data.boardId;
+                        loadAutomations();
+                    });
+                } catch (error) {
+                    console.log('Running outside Monday iframe, using demo mode');
+                    loadDemoMode();
+                }
+            }
+
+            // Demo mode for testing outside Monday
+            function loadDemoMode() {
+                setTimeout(() => {
+                    renderDashboard({
+                        boardName: 'Demo Board',
+                        automations: [
+                            {
+                                id: 'sync-status',
+                                name: 'Sync Status Between Connected Items',
+                                description: 'Automatically sync status changes between connected items across boards',
+                                enabled: true,
+                                type: 'sync'
+                            },
+                            {
+                                id: 'auto-assign',
+                                name: 'Auto-Assign by Status',
+                                description: 'Automatically assign items to team members based on status changes',
+                                enabled: false,
+                                type: 'assignment'
+                            },
+                            {
+                                id: 'due-date-alerts',
+                                name: 'Due Date Alerts',
+                                description: 'Send notifications when items are approaching their due dates',
+                                enabled: true,
+                                type: 'alerts'
+                            }
+                        ]
+                    });
+                }, 1000);
+            }
+
+            // Load automations from backend
+            async function loadAutomations() {
+                try {
+                    const response = await fetch(`/api/automations?boardId=${currentBoard}`, {
+                        headers: {
+                            'Authorization': `Bearer ${getAuthToken()}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        renderDashboard(data);
+                    } else {
+                        throw new Error('Failed to load automations');
+                    }
+                } catch (error) {
+                    console.error('Error loading automations:', error);
+                    loadDemoMode();
+                }
+            }
+
+            // Get auth token
+            function getAuthToken() {
+                // Try to get token from URL params (OAuth callback)
+                const urlParams = new URLSearchParams(window.location.search);
+                const token = urlParams.get('token');
+                
+                // Try to get from localStorage
+                return token || localStorage.getItem('monday_auth_token') || 'demo-token';
+            }
+
+            // Render main dashboard
+            function renderDashboard(data) {
+                const app = document.getElementById('app');
+                
+                const html = `
+                    <div class="card">
+                        <h2>📊 Board Overview</h2>
+                        <p><strong>Board:</strong> ${data.boardName || 'Current Board'}</p>
+                        <p><strong>Active Automations:</strong> ${data.automations ? data.automations.filter(a => a.enabled).length : 0}</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>🚀 Available Automations</h2>
+                        <div id="automations-list">
+                            ${renderAutomations(data.automations || [])}
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button class="btn" onclick="createNewAutomation()">+ Create New Automation</button>
+                            <button class="btn btn-secondary" onclick="refreshAutomations()">🔄 Refresh</button>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card">
+                            <h2>📈 Statistics</h2>
+                            <p><strong>Items Processed:</strong> ${data.stats?.itemsProcessed || 0}</p>
+                            <p><strong>Automations Run:</strong> ${data.stats?.automationsRun || 0}</p>
+                            <p><strong>Last Sync:</strong> ${data.stats?.lastSync || 'Never'}</p>
+                        </div>
+
+                        <div class="card">
+                            <h2>⚙️ Settings</h2>
+                            <p><strong>Sync Frequency:</strong> Real-time</p>
+                            <p><strong>Webhook Status:</strong> <span class="status-badge status-active">Active</span></p>
+                            <button class="btn btn-secondary" onclick="openSettings()">Configure Settings</button>
+                        </div>
+                    </div>
+                `;
+
+                app.innerHTML = html;
+            }
+
+            // Render individual automations
+            function renderAutomations(automations) {
+                return automations.map(automation => `
+                    <div class="automation-item">
+                        <div class="automation-info">
+                            <h3>${automation.name}</h3>
+                            <p>${automation.description}</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="status-badge ${automation.enabled ? 'status-active' : 'status-inactive'}">
+                                ${automation.enabled ? 'Active' : 'Inactive'}
+                            </span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" ${automation.enabled ? 'checked' : ''} 
+                                       onchange="toggleAutomation('${automation.id}', this.checked)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Toggle automation on/off
+            async function toggleAutomation(automationId, enabled) {
+                try {
+                    const response = await fetch(`/api/automations/${automationId}/toggle`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${getAuthToken()}`
+                        },
+                        body: JSON.stringify({ enabled })
+                    });
+
+                    if (response.ok) {
+                        showMessage('Automation updated successfully!', 'success');
+                        loadAutomations();
+                    } else {
+                        throw new Error('Failed to toggle automation');
+                    }
+                } catch (error) {
+                    console.error('Error toggling automation:', error);
+                    showMessage('Failed to update automation. Please try again.', 'error');
+                }
+            }
+
+            // Create new automation
+            function createNewAutomation() {
+                showMessage('Automation builder coming soon! For now, use the preset automations.', 'info');
+            }
+
+            // Refresh automations
+            function refreshAutomations() {
+                document.getElementById('app').innerHTML = `
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Refreshing automations...</p>
+                    </div>
+                `;
+                loadAutomations();
+            }
+
+            // Open settings
+            function openSettings() {
+                showMessage('Settings panel coming soon!', 'info');
+            }
+
+            // Show message to user
+            function showMessage(message, type) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = type;
+                messageDiv.textContent = message;
+                
+                const container = document.querySelector('.container');
+                container.insertBefore(messageDiv, container.firstChild);
+                
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 5000);
+            }
+
+            // Initialize app
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check if we have Monday SDK available
+                if (typeof mondaySdk !== 'undefined') {
+                    initializeMondaySDK();
+                } else {
+                    // Load Monday SDK script
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.monday.com/sdk/v1.js';
+                    script.onload = initializeMondaySDK;
+                    script.onerror = loadDemoMode;
+                    document.head.appendChild(script);
+                }
+            });
+
+            // Make functions globally available
+            window.toggleAutomation = toggleAutomation;
+            window.createNewAutomation = createNewAutomation;
+            window.refreshAutomations = refreshAutomations;
+            window.openSettings = openSettings;
+        })();
+    </script>
+</body>
+</html>
